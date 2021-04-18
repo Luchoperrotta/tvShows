@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Temporadas</h1>
+
+<form method="input" action="/films">
+  Buscar por serie: <input type= integer name="filter" />  
+  <input type="submit" />
+</form><br>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Numero</th>
+      <th>Lanzamineto</th>
+      <th><th>
+      <th>Serie</th>
+      <th><th>
+      <th>Minutos</th>
+      <th><th>
+      <th>Episodios</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @seasons.each do |season| %>
+     
+        <tr>
+          <td><%= season.number %></td>
+          <td><%= season.begins_at %></td>
+          <td><td>
+          <!td><%= season.film.name %></td>
+          <td><td>
+          <td><%= season.episodes.sum(:minute) %></td>
+          <td><td>
+          <td>
+            <% if season.episodes.count == 0 %>
+              <%= season.episodes.count %>
+            <% else %>
+              <%= link_to season.episodes.count, episodes_path(:season_id => season.id) %>
+            <% end %>
+          <td>
+          <td><%= link_to 'Show', season %></td>
+          <td><%= link_to 'Edit', edit_season_path(season) %></td>
+          <td><%= link_to 'Destroy', season, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+     
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Season', new_season_path %>

@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Series</h1>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Genero</th>
+      <th>Temporadas</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @films.each do |film| %>
+      <tr>
+        <td><%= film.name %></td>
+        <td><%= film.description %></td>
+        <td><%= film.genere.name %></td>
+        <td>
+          <% if film.season.count == 0 %>
+            <%= film.season.count %>
+          <% else %>
+            <%= link_to film.season.count, seasons_path(:film_id => film.id) %>
+          <% end %>
+			  <td>
+        <td><%= link_to 'Show', film %></td>
+        <td><%= link_to 'Edit', edit_film_path(film) %></td>
+        <td><%= link_to 'Destroy', film, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Film', new_film_path %>

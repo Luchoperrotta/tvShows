@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Episodios</h1>
+
+<form method="input" action="/seasons">
+  Buscar por temporada: <input type=integer name="filte" />  
+  <input type="submit" />
+</form><br>
+
+<form method="input" action="/episodes">
+  Buscar por nombre de episodio: <input type="text" name="fil" />  
+  <input type="submit" />
+</form><br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numero</th>
+      <th>Titulo</th>
+      <th>Rodaje</th>
+      <th>Minutos</th>
+      <th>Temporada</th>
+      <th>Serie</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @episodes.each do |episode| %>
+      <tr>
+        <td><%= episode.numer %></td>
+        <td><%= episode.title %></td>
+        <td><%= episode.emmited_at %></td>
+        <td><%= episode.minute %></td>
+        <td><%= episode.season_id %></td>
+        <td><%= episode.season.film.name %></td>
+        <td><%= link_to 'Show', episode %></td>
+        <td><%= link_to 'Edit', edit_episode_path(episode) %></td>
+        <td><%= link_to 'Destroy', episode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Episode', new_episode_path %>
